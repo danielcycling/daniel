@@ -7,6 +7,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://danielcycling.github.io/daniel',
+	base: '/daniel',
 	integrations: [mdx(), sitemap()],
 	fonts: [
 		{

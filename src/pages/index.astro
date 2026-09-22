@@ -1,8 +1,10 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
+const profileSrc = `${import.meta.env.BASE_URL}profile.jpg`;
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
 
 // UPTIMEの起点日。自分の好きな日付に変えてOK(サイト公開日など)
 const SINCE = '2026-09-20';
@@ -52,7 +54,7 @@ const career = [
 			<section class="intro">
 				<p class="prompt">$ whoami</p>
 				<div class="who">
-					<img src="/profile.jpg" alt="西海 樹" class="avatar" />
+					<img src={profileSrc} alt="Ângkôr Vôtt" class="avatar" />
 					<div class="who-text">
 						<h1>西海 樹<span class="cursor">_</span></h1>
 						<p class="en">Saikai Tatsuki</p>
