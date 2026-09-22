@@ -1,49 +1,297 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+// UPTIMEの起点日。自分の好きな日付に変えてOK(サイト公開日など)
+const SINCE = '2026-09-20';
+
+// 経歴のデータ。新しい順に並べる。1件足したいときは { ... }, を1つ増やすだけ。
+const career = [
+	{
+		year: '2026.03',
+		title: '電子情報通信学会 総合大会 ポスター発表(福岡)',
+		note: '企業との共同研究のため詳細は非公開',
+	},
+	{
+		year: '2025.09',
+		title: 'GCI寄付講座修了',
+		note: '東京大学大学院工学系研究科グローバル消費インテリジェンス寄附講座において，データ分析およびマーケティングに関するプログラムを修了し最終審査に合格した'
+	},
+	{
+		year: '2025.04',
+		title: '平山研究室 配属(B4)',
+		note: '専門は画像処理や機械学習',
+	},
+	{
+		year: '2024~2025',
+		title: '看護学習 × MR をテーマに活動',
+		note: 'Unity，MetaQuest3をベースに看護学習仮想空間を構築',
+	},
+	{
+		year: '2023',
+		title: '人間環境大学 環境科学部 環境データサイエンス学科 入学',
+		note: 'バスケットボール部・プログラミング部(代表)に所属',
+	},
+	{
+		year: '2023',
+		title: '静岡県立浜松工業高等学校 システム化学科 卒業',
+	},
+];
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your{' '}
-				<code>astro.config.mjs</code> file. You can customize your setup with{' '}
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to{' '}
-				<a href="https://docs.astro.build/">read the docs</a>{' '}
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out{' '}
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>{' '}
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+			<section class="intro">
+				<p class="prompt">$ whoami</p>
+				<div class="who">
+					<img src="/profile.jpg" alt="西海 樹" class="avatar" />
+					<div class="who-text">
+						<h1>西海 樹<span class="cursor">_</span></h1>
+						<p class="en">Saikai Tatsuki</p>
+						<p class="affiliation">
+							人間環境大学 環境科学部 環境データサイエンス学科<br />
+							平山研究室(B4)
+						</p>
+					</div>
+				</div>
+
+				<p class="prompt second">$ cat about.txt</p>
+				<p id="typed" class="typed" aria-live="polite"></p>
+			</section>
+
+			<section class="status" aria-label="status">
+				<div class="panel">
+					<span class="label">LOCAL TIME</span>
+					<span class="value" id="clock">--:--:--</span>
+				</div>
+				<div class="panel">
+					<span class="label">UPTIME</span>
+					<span class="value" id="uptime" data-since={SINCE}>-- days</span>
+				</div>
+				<div class="panel">
+					<span class="label">LOCATION</span>
+					<span class="value">Aichi, JP</span>
+				</div>
+				<div class="panel">
+					<span class="label">STACK</span>
+					<span class="value">Python</span>
+				</div>
+			</section>
+
+			<section>
+				<h2>Career</h2>
+				<ul class="timeline">
+					{
+						career.map((item) => (
+							<li>
+								<span class="year">{item.year}</span>
+								<div class="detail">
+									<span class="what">{item.title}</span>
+									{item.note && <span class="note">{item.note}</span>}
+								</div>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+
+						<section>
+				<h2>Now</h2>
+				<ul class="now-list">
+					<li>塾講師(業務委託)として指導中</li>
+					<li>平山研究室にて画像処理を専門に勉強</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Writing</h2>
+				<p><a href="/blog/">記事の一覧を見る →</a></p>
+			</section>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	section {
+		margin-bottom: 3rem;
+	}
+	.intro {
+		margin-top: 2rem;
+		padding: 1.5rem;
+		background: var(--bg-panel);
+		border: 1px solid var(--border);
+		border-radius: 6px;
+	}
+	.who {
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
+	}
+	.avatar {
+		flex: 0 0 auto;
+		width: 128px;
+		height: 128px;
+		border-radius: 8px;
+		object-fit: cover;
+		border: 1px solid var(--border);
+	}
+	.who-text {
+		flex: 1 1 auto;
+	}
+	@media (max-width: 480px) {
+		.who {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 1rem;
+		}
+	}
+	.prompt {
+		margin: 0 0 0.5rem;
+		color: var(--text-dim);
+	}
+	.prompt.second {
+		margin-top: 1.8rem;
+	}
+	.intro h1 {
+		margin: 0 0 0.2rem;
+	}
+	.en {
+		color: var(--text-dim);
+		margin: 0 0 1rem;
+	}
+	.affiliation {
+		margin: 0;
+	}
+	.typed {
+		margin: 0;
+		min-height: 3.7em;
+		white-space: pre-wrap;
+	}
+
+	.status {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 0.8rem;
+	}
+	.panel {
+		display: flex;
+		flex-direction: column;
+		gap: 0.3rem;
+		padding: 0.8rem 1rem;
+		background: var(--bg-panel);
+		border: 1px solid var(--border);
+		border-top: 2px solid var(--accent);
+		border-radius: 4px;
+	}
+	.label {
+		font-size: 0.7rem;
+		letter-spacing: 0.1em;
+		color: var(--text-dim);
+	}
+	.value {
+		font-size: 0.95rem;
+		color: #fff;
+	}
+	@media (max-width: 640px) {
+		.status {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+		.timeline {
+		list-style: none;
+		margin: 1rem 0 0;
+		padding: 0 0 0 1rem;
+		border-left: 1px solid var(--border);
+	}
+	.timeline li {
+		position: relative;
+		display: flex;
+		gap: 1.2rem;
+		margin: 0 0 1.2rem;
+	}
+	.timeline li::before {
+		content: '';
+		position: absolute;
+		left: calc(-1rem - 4px);
+		top: 0.7em;
+		width: 7px;
+		height: 7px;
+		background: var(--accent);
+		border-radius: 50%;
+	}
+	.year {
+		flex: 0 0 3.5rem;
+		color: var(--text-dim);
+	}
+	.detail {
+		display: flex;
+		flex-direction: column;
+	}
+	.what {
+		color: #fff;
+	}
+	.note {
+		color: var(--text-dim);
+		font-size: 0.85rem;
+	}
+	.now-list {
+		margin: 1rem 0 0;
+		padding-left: 1.2rem;
+		color: var(--text);
+	}
+	.now-list li {
+		margin-bottom: 0.4rem;
+	}
+</style>
+
+<script>
+	// ---- タイピング演出 ----
+	const ABOUT =
+		'画像処理・機械学習 × 海洋というテーマについて日々考えています．';
+	const typedEl = document.getElementById('typed');
+	const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	if (typedEl) {
+		if (reduceMotion) {
+			typedEl.textContent = ABOUT;
+		} else {
+			let i = 0;
+			const tick = () => {
+				typedEl.textContent = ABOUT.slice(0, i);
+				i++;
+				if (i <= ABOUT.length) setTimeout(tick, 60);
+			};
+			setTimeout(tick, 600);
+		}
+	}
+
+	// ---- 時計 ----
+	const clockEl = document.getElementById('clock');
+	const updateClock = () => {
+		if (!clockEl) return;
+		clockEl.textContent = new Date().toLocaleTimeString('ja-JP', {
+			timeZone: 'Asia/Tokyo',
+			hour12: false,
+		});
+	};
+	updateClock();
+	setInterval(updateClock, 1000);
+
+	// ---- UPTIME(起点日からの日数) ----
+	const uptimeEl = document.getElementById('uptime');
+	if (uptimeEl) {
+		const since = new Date(uptimeEl.dataset.since + 'T00:00:00+09:00');
+		const days = Math.max(0, Math.floor((Date.now() - since.getTime()) / 86400000));
+		uptimeEl.textContent = days + ' days';
+	}
+</script>
